@@ -11,6 +11,10 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sorbet (0.5.11558)
+      sorbet-static (= 0.5.11558)
+    sorbet-runtime (0.5.11558)
+    sorbet-static (0.5.11558-x86_64-linux)
     websocket (1.2.11)
 
 PLATFORMS
@@ -18,6 +22,8 @@ PLATFORMS
 
 DEPENDENCIES
   selenium-webdriver (~> 4.4)
+  sorbet
+  sorbet-runtime
 
 BUNDLED WITH
    2.3.7

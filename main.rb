@@ -78,6 +78,7 @@ def main
     file.write(json_data)
   end
 
+  driver.quit
   puts 'End session'
 end
 

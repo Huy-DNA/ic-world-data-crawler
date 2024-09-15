@@ -73,7 +73,7 @@ def main
 
   items = fetch_all_items_with(driver, 'https://www.thegioiic.com/product/', 0)
 
-  json_data = items.as_json.to_json
+  json_data = items.map(&:as_json).map(&:to_json)
   File.open('data.txt', 'w') do |file|
     file.write(json_data)
   end

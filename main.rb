@@ -2,14 +2,18 @@
 
 require 'selenium-webdriver'
 
-puts 'Start session'
+def main
+  puts 'Start session'
 
-driver = Selenium::WebDriver.for :chrome
+  driver = Selenium::WebDriver.for :chrome
 
-driver.navigate.to 'https://www.thegioiic.com/product/'
+  driver.navigate.to 'https://www.thegioiic.com/product/'
 
-puts 'Navigated to www.thegioiic.com'
+  puts 'Navigated to www.thegioiic.com'
 
-puts 'End session'
+  puts 'End session'
 
-driver.quit
+  driver.quit
+end
+
+main

@@ -12,11 +12,19 @@ class Item < T::Struct
   const :metadata, T::Hash[String, T.anything]
 end
 
-sig { params(driver: Selenium::WebDriver::Chrome::Driver).returns(T::Array[Item]) }
-def fetch_all_items_with(driver)
-  driver.find_elements(css: '.box-item').map do |e|
-    Item.new(name: '', sub_items: [], metadata: {})
+sig { params(driver: Selenium::WebDriver::Chrome::Driver, link: String, level: Integer).returns(T::Array[Item]) }
+def fetch_all_items_with(driver, link, level)
+  driver.navigate.to link
+  puts "#{' ' * level}Navigated to #{link}"
+  res = driver.find_elements(css: '.box-item').map do |box|
+    a = box.find_elements(tag_name: 'div')[1].find_element(tag_name: 'a')
+    [a.text, a.attribute('href')]
+  end.map do |(text, href)|
+    Item.new(name: text, sub_items: fetch_all_items_with(driver, href, level + 1), metadata: {})
   end
+  puts "#{' ' * level}Exitted from #{link}"
+  driver.navigate.back
+  res
 end
 
 def main
@@ -24,11 +32,7 @@ def main
 
   driver = Selenium::WebDriver.for :chrome
 
-  driver.navigate.to 'https://www.thegioiic.com/product/'
-
-  puts 'Navigated to www.thegioiic.com'
-
-  fetch_all_items_with driver
+  fetch_all_items_with(driver, 'https://www.thegioiic.com/product/', 0)
 
   puts 'End session'
 

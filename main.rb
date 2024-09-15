@@ -21,10 +21,16 @@ def fetch_all_items_with(driver, link, level)
     [a.text, a.attribute('href')]
   end.map do |(text, href)|
     Item.new(name: text, sub_items: fetch_all_items_with(driver, href, level + 1), metadata: {})
+  rescue
+    driver.navigate.to href
+    # fetch metadata here
+    Item.new(name: text, sub_items: [], metadata: {})
+    driver.navigate.back
   end
+  res
+ensure
   puts "#{' ' * level}Exitted from #{link}"
   driver.navigate.back
-  res
 end
 
 def main

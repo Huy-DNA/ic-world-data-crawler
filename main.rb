@@ -1,6 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'selenium-webdriver'
+
+def fetch_all_items(driver)
+
+end
 
 def main
   puts 'Start session'

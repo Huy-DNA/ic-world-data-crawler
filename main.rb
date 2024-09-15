@@ -3,6 +3,7 @@
 
 require 'sorbet-runtime'
 require 'selenium-webdriver'
+require 'json'
 
 extend T::Sig
 
@@ -13,6 +14,14 @@ class Item < T::Struct
   const :name, String
   const :sub_items, T::Array[Item]
   const :metadata, T::Hash[Symbol, T.anything]
+
+  def as_json
+    {
+      name: @name,
+      sub_categories: @sub_items.map(&:as_json),
+      metadata: @metadata
+    }
+  end
 end
 
 sig { params(driver: Selenium::WebDriver::Chrome::Driver, link: String, level: Integer).returns(T::Array[Item]) }
@@ -44,9 +53,8 @@ def fetch_all_items_with(driver, link, level)
       metadata[name.to_sym] = value
     rescue
     end
-    Item.new(name: text, sub_items: [], metadata: metadata)
-    puts metadata
     driver.navigate.back
+    Item.new(name: text, sub_items: [], metadata: metadata)
   end
   res
 ensure
@@ -61,9 +69,12 @@ def main
 
   items = fetch_all_items_with(driver, 'https://www.thegioiic.com/product/', 0)
 
-  puts 'End session'
+  json_data = items.as_json.to_json
+  File.open('data.txt', 'w') do |file|
+    file.write(json_data)
+  end
 
-  puts items
+  puts 'End session'
 
   driver.quit
 end

@@ -67,8 +67,9 @@ end
 
 def main
   puts 'Start session'
-
   driver = Selenium::WebDriver.for :chrome
+
+  driver.navigate.to 'https://www.google.com/'
 
   items = fetch_all_items_with(driver, 'https://www.thegioiic.com/product/', 0)
 
@@ -78,8 +79,6 @@ def main
   end
 
   puts 'End session'
-
-  driver.quit
 end
 
 main

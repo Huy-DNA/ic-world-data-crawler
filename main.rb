@@ -39,18 +39,21 @@ def fetch_all_items_with(driver, link, level)
   rescue LeafError
     driver.navigate.to href
     # fetch metadata here
-    title_div = driver.find_element(css: '.product-title-show')
-    img = driver.find_element(css: '#show-img')
     metadata = {}
-    metadata[:thumbnail_url] = img.attribute('src')
-    metadata[:title] = title_div.find_element(tag_name: 'h1').text
-    metadata[:brand] = title_div.find_element(css: 'div > div:nth-child(1) span + *').text
-    metadata[:manufacturer] = title_div.find_element(css: 'div > div:nth-child(2) span + *').text
-    metadata[:description] = title_div.find_element(css: 'div > div:nth-child(3) span + *').text
-    driver.find_elements(css: 'table tbody tr').each do |row|
-      name = row.find_element(css: 'td:nth-child(1)').text
-      value = row.find_element(css: 'td:nth-child(2)').text
-      metadata[name.to_sym] = value
+    begin
+      title_div = driver.find_element(css: '.product-title-show')
+      img = driver.find_element(css: '#show-img')
+      metadata[:thumbnail_url] = img.attribute('src')
+      metadata[:title] = title_div.find_element(tag_name: 'h1').text
+      metadata[:brand] = title_div.find_element(css: 'div > div:nth-child(1) span + *').text
+      metadata[:manufacturer] = title_div.find_element(css: 'div > div:nth-child(2) span + *').text
+      metadata[:description] = title_div.find_element(css: 'div > div:nth-child(3) span + *').text
+      driver.find_elements(css: 'table tbody tr').each do |row|
+        name = row.find_element(css: 'td:nth-child(1)').text
+        value = row.find_element(css: 'td:nth-child(2)').text
+        metadata[name.to_sym] = value
+      rescue
+      end
     rescue
     end
     driver.navigate.back

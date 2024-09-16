@@ -56,20 +56,16 @@ def fetch_all_items_with(driver, link, level)
       end
     rescue
     end
-    driver.navigate.back
     Item.new(name: text, sub_items: [], metadata: metadata)
   end
   res
 ensure
   puts "#{' ' * level}Exitted from #{link}"
-  driver.navigate.back
 end
 
 def main
   puts 'Start session'
   driver = Selenium::WebDriver.for :chrome
-
-  driver.navigate.to 'https://www.google.com/'
 
   items = fetch_all_items_with(driver, 'https://www.thegioiic.com/product/', 0)
 

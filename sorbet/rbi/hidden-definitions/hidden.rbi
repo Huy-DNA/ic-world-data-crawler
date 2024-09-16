@@ -4098,6 +4098,10 @@ class Object
   TOPLEVEL_BINDING = ::T.let(nil, ::T.untyped)
 end
 
+class Object
+  extend ::T::Private::Methods::MethodHooks
+end
+
 module Open3
   VERSION = ::T.let(nil, ::T.untyped)
 end
@@ -5075,109 +5079,6 @@ module Selenium::WebDriver::Chrome::Features
 end
 
 class Selenium::WebDriver::Chrome::Options
-  def accept_insecure_certs(); end
-
-  def accept_insecure_certs=(value); end
-
-  def android_activity(); end
-
-  def android_activity=(value); end
-
-  def android_device_serial(); end
-
-  def android_device_serial=(value); end
-
-  def android_package(); end
-
-  def android_package=(value); end
-
-  def android_use_running_app(); end
-
-  def android_use_running_app=(value); end
-
-  def args(); end
-
-  def args=(value); end
-
-  def binary(); end
-
-  def binary=(value); end
-
-  def browser_name(); end
-
-  def browser_name=(value); end
-
-  def browser_version(); end
-
-  def browser_version=(value); end
-
-  def debugger_address(); end
-
-  def debugger_address=(value); end
-
-  def detach(); end
-
-  def detach=(value); end
-
-  def emulation(); end
-
-  def emulation=(value); end
-
-  def exclude_switches(); end
-
-  def exclude_switches=(value); end
-
-  def local_state(); end
-
-  def local_state=(value); end
-
-  def minidump_path(); end
-
-  def minidump_path=(value); end
-
-  def page_load_strategy(); end
-
-  def page_load_strategy=(value); end
-
-  def perf_logging_prefs(); end
-
-  def perf_logging_prefs=(value); end
-
-  def platform_name(); end
-
-  def platform_name=(value); end
-
-  def prefs(); end
-
-  def prefs=(value); end
-
-  def proxy(); end
-
-  def proxy=(value); end
-
-  def set_window_rect(); end
-
-  def set_window_rect=(value); end
-
-  def strict_file_interactability(); end
-
-  def strict_file_interactability=(value); end
-
-  def timeouts(); end
-
-  def timeouts=(value); end
-
-  def unhandled_prompt_behavior(); end
-
-  def unhandled_prompt_behavior=(value); end
-
-  def web_socket_url(); end
-
-  def web_socket_url=(value); end
-
-  def window_types(); end
-
-  def window_types=(value); end
   BROWSER = ::T.let(nil, ::T.untyped)
   KEY = ::T.let(nil, ::T.untyped)
 end

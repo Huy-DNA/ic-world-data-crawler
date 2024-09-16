@@ -3,4 +3,5 @@
 
 # typed: strong
 module ::Anonymous_Delegator_1; end
+module T::Private::Methods::MethodHooks; end
 module YARD::Logger; end

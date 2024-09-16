@@ -10,8 +10,11 @@ def main
   file = File.open('data.txt', 'r')
   objs = JSON.parse file.read
   file.close
-  File.open('formatted.json', 'w') do |file|
-    file.write objs
+
+  objs.each_with_index do |obj, i|
+    File.open("formatted/#{i}.json", 'w') do |file|
+      file.write obj
+    end
   end
 end
 
